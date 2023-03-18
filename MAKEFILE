@@ -1,0 +1,30 @@
+# sample make file for building AHCIfix virtual device for Windows/386
+
+# comment this definition out with a "#", if building a non-debugging version
+Debug=-DDEBUG
+
+MASMOBJ=masm5 -p -w2 -Mx $(Debug) -I..\include 
+MASMLST=masm5 -l -p -w2 -Mx $(Debug) -I..\include 
+
+.asm.obj:
+        $(MASMOBJ) $*;
+
+.asm.lst:
+        $(MASMLST) $*;
+
+all:    AHCIfix.386
+
+AHCIfix.obj AHCIfix.lst: AHCIfix.asm ..\include\arena.asm ..\include\v86mmgr.inc \
+	 ..\include\sysinfo.inc ..\include\debug.inc \
+	 ..\include\vmm.inc
+
+..\include\arena.obj ..\include\arena.lst: ..\include\arena.asm
+
+
+OBJS =  AHCIfix.obj 
+
+AHCIfix.386: AHCIfix.def $(OBJS)
+        link386 @AHCIfix.lnk
+        addhdr AHCIfix.386
+        mapsym32 AHCIfix
+

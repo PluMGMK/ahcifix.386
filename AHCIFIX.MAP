@@ -1,0 +1,41 @@
+
+ AHCIfix
+
+ Start         Length     Name                   Class
+ 0001:00000000 0000001B2H _LTEXT                 CODE 32-bit
+ 0001:000001B4 0000000ADH _LDATA                 CODE 32-bit
+ 0002:00000000 000000035H _ITEXT                 ICODE 32-bit
+ 0002:00000038 000000000H _IDATA                 ICODE 32-bit
+ 0003:00000000 000000000H _TEXT                  PCODE 32-bit
+ 0003:00000000 000000000H _DATA                  PCODE 32-bit
+ 0003:00000000 00000041FH _RCODE                 RCODE 16-bit
+
+ Origin   Group
+ 0002:0   _IGROUP
+ 0001:0   _LGROUP
+ 0003:0   _PGROUP
+ 0000:0   FLAT
+
+ Address       Export                  Alias
+
+ 0001:000001B4 AHCIfix_DDB             AHCIfix_DDB
+
+  Address         Publics by Name
+
+ 0001:00000197       @AHCIfix_Get_Version
+ 0001:00000000       AHCIfix_Control
+ 0001:000001B4       AHCIfix_DDB
+ 0002:00000000       AHCIfix_Device_Init
+ 0001:0000011B       Restore_ES_DS
+ 0001:00000012       VDS_Hook
+
+  Address         Publics by Value
+
+ 0001:00000000       AHCIfix_Control
+ 0001:00000012       VDS_Hook
+ 0001:0000011B       Restore_ES_DS
+ 0001:00000197       @AHCIfix_Get_Version
+ 0001:000001B4       AHCIfix_DDB
+ 0002:00000000       AHCIfix_Device_Init
+
+Program entry point at 0003:0025
