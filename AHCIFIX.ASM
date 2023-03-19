@@ -326,7 +326,7 @@ EndDoc
 
 BeginProc AHCIfix_Get_Version, SERVICE
 
-	mov	eax, 100h
+	mov	eax, 101h
 	clc
 	ret
 
@@ -361,13 +361,16 @@ orig_vds_flags	db ?
 
 ;   ENTRY:
 ;       CS=DS=ES
-;       AX = Win386 version number (requires 3.10)
+;       AX = Win386 version number
 ;	SI = Environment segment
 BeginProc AHCIfix_init
 
 	test	bx, Duplicate_Device_ID
-	jnz	no_AHCIfix_fnd	    ; don't load if an AHCIfix device has already
-				    ; loaded!
+	jnz	no_AHCIfix_fnd	; don't load if an AHCIfix device has already
+				; loaded!
+
+	test	bx, Loading_From_INT2F
+	jnz	success	; DOS driver has given us our retpoint in EDX :)
 
 	; Use int 2Fh to get the original int 13h vector.
 	; To do this, we (annoyingly) have to set it to something fake
@@ -445,6 +448,7 @@ BeginProc AHCIfix_init
 	test	edx, edx
 	jz	no_AHCIfix_fnd
 
+success:
 	mov	ax, Device_Load_Ok
 	jmp	init_exit
 no_AHCIfix_fnd:

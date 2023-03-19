@@ -25,4 +25,10 @@ This removes references to the [`TR6` and `TR7` registers](https://en.wikipedia.
 
 Simply add `device=ahcifix.386` to the `[386Enh]` section of `C:\WINDOWS\SYSTEM.INI`. You should specify the full path, or else copy the file `AHCIFIX.386` to `C:\WINDOWS\SYSTEM`. You can get the file by building it as described above, or by downloading a [release](https://github.com/PluMGMK/ahcifix.386/releases).
 
+Alternatively (or additionally), if using a DOS Memory Manager, such as EMM386, you can add [`ahcifixd.sys`](https://github.com/PluMGMK/ahcifixd.sys) to your `CONFIG.SYS` file, including the full path to `ahcifix.386` after it on the same line. For example:
+
+```
+DEVICE=C:\AHCIFIXD\AHCIFIXD.SYS C:\WIN16DDK\386\AHCIFIX\AHCIFIX.386
+```
+
 **NOTE: This driver works for me, on the one motherboard I have tested it on ([this motherboard](https://us.msi.com/Motherboard/Z97-GAMING-3))! Please proceed with caution if trying it on a different motherboard!**
